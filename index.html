@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Danmaku</title>
+    </head>
+    <body>
+        <input id="msg"></input>
+        <button onClick="send()">Send</button>
+        <div id="log"></div>
+        <script>
+var wsurl = "ws://danmu.integ.ml:8080/ws?channel=Demo";
+var ws = new WebSocket(wsurl);
+
+// event emmited when connected
+ws.onopen = function () {
+    console.log('websocket is connected ...')
+    // sending a send event to websocket server
+    ws.send('DANMAKU:connected')
+}
+
+// event emmited when receiving message 
+ws.onmessage = function (ev) {
+    var para = document.createElement("P");                       // Create a <p> node
+    var t = document.createTextNode(`${ev.timeStamp}: ${ev.data}`);      // Create a text node
+    para.appendChild(t);
+    document.querySelector('#log').appendChild(para);
+}
+
+function send() {
+    var msg = document.querySelector('#msg').value;
+    ws.send(`DANMAKU:${msg}`);
+    document.querySelector('#msg').value = '';
+}
+
+// Get the input field
+var input = document.getElementById("msg");
+
+// Execute a function when the user releases a key on the keyboard
+input.addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    send();
+  }
+}); 
+        </script>
+    </body>
+</html>

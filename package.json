@@ -1,0 +1,19 @@
+{
+  "name": "danmu",
+  "version": "1.0.0",
+  "description": "danmu-server",
+  "main": "danmaku_server.mjs",
+  "dependencies": {},
+  "devDependencies": {
+    "express": "^4.16.4",
+    "express-ws": "^4.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "danmu"
+  ],
+  "author": "Integ",
+  "license": "MIT"
+}
